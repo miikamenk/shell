@@ -174,6 +174,9 @@ QtObject {
                 Component {
                     BarEntries {}
                 }
+                Component {
+                    LauncherActions {}
+                }
             }
         },
         Component {
