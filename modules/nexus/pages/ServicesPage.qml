@@ -43,6 +43,24 @@ PageBase {
         }
     ]
 
+    readonly property list<var> aliasFields: [
+        {
+            key: "from",
+            label: Tr.tr("Reported name"),
+            type: "text",
+            hint: Tr.tr("The MPRIS identity the player reports"),
+            placeholder: "com.github.th_ch.youtube_music",
+            defaultValue: ""
+        },
+        {
+            key: "to",
+            label: Tr.tr("Display name"),
+            type: "text",
+            placeholder: "YT Music",
+            defaultValue: ""
+        }
+    ]
+
     title: Tr.tr("Services")
 
     ColumnLayout {
@@ -143,6 +161,31 @@ PageBase {
             fallbackIcon: "music_note"
             fallbackText: GlobalConfig.services.defaultPlayer || Tr.trCtx("Auto", "default media player")
             onSelected: item => GlobalConfig.services.defaultPlayer = item.text
+        }
+
+        // Player names
+        SectionHeader {
+            text: Tr.tr("Player names")
+        }
+
+        ObjectListEditor {
+            function labelFor(item: var): string {
+                return item.from || Tr.tr("Unnamed alias");
+            }
+
+            function subtextFor(item: var): string {
+                return item.to ? Tr.tr("Shown as %1").arg(item.to) : "";
+            }
+
+            rootParent: root.flickable
+            values: GlobalConfig.services.playerAliases
+            fields: root.aliasFields
+            rowIcon: "badge"
+            addLabel: Tr.tr("Add alias")
+            addHeader: Tr.tr("Add player alias")
+            editHeader: Tr.tr("Edit player alias")
+            emptyLabel: Tr.tr("Players use the names they report")
+            onEdited: values => GlobalConfig.services.playerAliases = values
         }
 
         // Input increments
