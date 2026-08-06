@@ -38,6 +38,16 @@ PageBase {
         }
 
         StepperRow {
+            label: Tr.tr("Minimum hover height")
+            subtext: Tr.tr("Distance down the screen edge before hovering reveals the sidebar (px)")
+            value: Config.sidebar.minHoverThreshold
+            from: 0
+            to: 1000
+            stepSize: 10
+            onMoved: v => GlobalConfig.sidebar.minHoverThreshold = Math.round(v)
+        }
+
+        StepperRow {
             last: true
             label: Tr.tr("Drag threshold")
             subtext: Tr.tr("Pixels dragged before the sidebar opens")
