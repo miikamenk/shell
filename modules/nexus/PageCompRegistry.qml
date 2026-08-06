@@ -211,6 +211,14 @@ QtObject {
                 }
             }
         },
+        Component {
+            // Files & assets
+            StackPage {
+                Component {
+                    FilesAndAssets {}
+                }
+            }
+        },
 
         // About
         Component {

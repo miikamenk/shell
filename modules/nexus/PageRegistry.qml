@@ -121,6 +121,13 @@ QtObject {
             description: Tr.tr("UI language, weather location, display units"),
             category: "shell"
         },
+        {
+            id: "files",
+            label: qsTr("Files & assets"),
+            icon: "folder",
+            description: qsTr("Wallpaper folder, logo, images"),
+            category: "shell"
+        },
 
         // About
         {
