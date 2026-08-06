@@ -185,6 +185,14 @@ QtObject {
             }
         },
         Component {
+            // Power & idle
+            StackPage {
+                Component {
+                    PowerPage {}
+                }
+            }
+        },
+        Component {
             // Services
             StackPage {
                 Component {

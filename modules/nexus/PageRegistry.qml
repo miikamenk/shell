@@ -101,6 +101,13 @@ QtObject {
             category: "shell"
         },
         {
+            id: "power",
+            label: qsTr("Power & idle"),
+            icon: "bedtime",
+            description: qsTr("Idle timeouts, battery warnings"),
+            category: "shell"
+        },
+        {
             id: "services",
             label: Tr.tr("Services"),
             icon: "build",
