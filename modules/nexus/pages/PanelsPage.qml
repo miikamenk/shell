@@ -44,11 +44,39 @@ PageBase {
         }
 
         NavRow {
-            last: true
             icon: "construction"
             text: Tr.tr("Utilities")
             subtext: Config.utilities.enabled ? Tr.trCtx("Enabled", "panel status") : Tr.trCtx("Disabled", "panel status")
             onClicked: root.nState.openSubPage(5)
+        }
+
+        NavRow {
+            icon: "tune"
+            text: qsTr("On-screen display")
+            subtext: Config.osd.enabled ? qsTr("Enabled") : qsTr("Disabled")
+            onClicked: root.nState.openSubPage(11)
+        }
+
+        NavRow {
+            last: true
+            icon: "power_settings_new"
+            text: qsTr("Session menu")
+            subtext: Config.session.enabled ? qsTr("Enabled") : qsTr("Disabled")
+            onClicked: root.nState.openSubPage(12)
+        }
+
+        // Screen
+        SectionHeader {
+            text: qsTr("Screen")
+        }
+
+        NavRow {
+            first: true
+            last: true
+            icon: "border_outer"
+            text: qsTr("Screen border")
+            subtext: Config.border.thickness > 0 ? qsTr("%1 px thick").arg(Config.border.clampedThickness) : qsTr("Hidden")
+            onClicked: root.nState.openSubPage(13)
         }
     }
 }

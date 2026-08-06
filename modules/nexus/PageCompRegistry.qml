@@ -160,6 +160,17 @@ QtObject {
                 Component {
                     BarClock {}
                 }
+
+                // Other panel sub-pages
+                Component {
+                    OsdPanel {}
+                }
+                Component {
+                    SessionPanel {}
+                }
+                Component {
+                    BorderPanel {}
+                }
             }
         },
         Component {
