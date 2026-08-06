@@ -75,6 +75,13 @@ PageBase {
             onToggled: GlobalConfig.notifs.openExpanded = checked
         }
 
+        ToggleRow {
+            text: Tr.tr("Action on click")
+            subtext: Tr.tr("Run the default action when a notification is clicked")
+            checked: GlobalConfig.notifs.actionOnClick
+            onToggled: GlobalConfig.notifs.actionOnClick = checked
+        }
+
         StepperRow {
             label: Tr.tr("Default timeout")
             // TRANSLATORS: ms is the millisecond unit, leave it untranslated
@@ -87,6 +94,16 @@ PageBase {
         }
 
         StepperRow {
+            label: Tr.tr("Fullscreen timeout")
+            subtext: Tr.tr("Time before a notification over a fullscreen app dismisses (ms)")
+            value: GlobalConfig.notifs.fullscreenExpireTimeout
+            from: 500
+            to: 60000
+            stepSize: 500
+            onMoved: v => GlobalConfig.notifs.fullscreenExpireTimeout = Math.round(v)
+        }
+
+        StepperRow {
             last: true
             label: Tr.tr("Group preview count")
             subtext: Tr.tr("Notifications shown per group before collapsing")
@@ -95,6 +112,33 @@ PageBase {
             to: 10
             stepSize: 1
             onMoved: v => GlobalConfig.notifs.groupPreviewNum = Math.round(v)
+        }
+
+        // Gestures
+        SectionHeader {
+            text: Tr.tr("Gestures")
+        }
+
+        StepperRow {
+            first: true
+            label: Tr.tr("Dismiss threshold")
+            subtext: Tr.tr("How far a notification must be swiped to dismiss it (%)")
+            value: Math.round(Config.notifs.clearThreshold * 100)
+            from: 5
+            to: 100
+            stepSize: 5
+            onMoved: v => GlobalConfig.notifs.clearThreshold = v / 100
+        }
+
+        StepperRow {
+            last: true
+            label: Tr.tr("Expand threshold")
+            subtext: Tr.tr("Vertical drag before a notification expands (px)")
+            value: Config.notifs.expandThreshold
+            from: 0
+            to: 200
+            stepSize: 5
+            onMoved: v => GlobalConfig.notifs.expandThreshold = Math.round(v)
         }
 
         // Toasts
@@ -129,6 +173,13 @@ PageBase {
 
         ToggleRow {
             first: true
+            text: Tr.tr("Config reloaded")
+            subtext: Tr.tr("Confirm when shell.json is reloaded")
+            checked: GlobalConfig.utilities.toasts.configLoaded
+            onToggled: GlobalConfig.utilities.toasts.configLoaded = checked
+        }
+
+        ToggleRow {
             text: Tr.tr("Charging changes")
             checked: GlobalConfig.utilities.toasts.chargingChanged
             onToggled: GlobalConfig.utilities.toasts.chargingChanged = checked
@@ -174,6 +225,13 @@ PageBase {
             text: Tr.tr("Keyboard layout changes")
             checked: GlobalConfig.utilities.toasts.kbLayoutChanged
             onToggled: GlobalConfig.utilities.toasts.kbLayoutChanged = checked
+        }
+
+        ToggleRow {
+            text: Tr.tr("Keyboard layout limit")
+            subtext: Tr.tr("Warn when more than four XKB layouts are configured")
+            checked: GlobalConfig.utilities.toasts.kbLimit
+            onToggled: GlobalConfig.utilities.toasts.kbLimit = checked
         }
 
         ToggleRow {
