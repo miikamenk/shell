@@ -171,6 +171,9 @@ QtObject {
                 Component {
                     BorderPanel {}
                 }
+                Component {
+                    BarEntries {}
+                }
             }
         },
         Component {

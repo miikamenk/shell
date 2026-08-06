@@ -56,6 +56,13 @@ PageBase {
 
         NavRow {
             first: true
+            icon: "view_column"
+            text: qsTr("Bar layout")
+            subtext: qsTr("Which components are shown, and in what order")
+            onClicked: root.nState.openSubPage(14)
+        }
+
+        NavRow {
             icon: "workspaces"
             text: Tr.tr("Workspaces")
             subtext: Tr.tr("Indicators, window icons")
