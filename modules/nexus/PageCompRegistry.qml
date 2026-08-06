@@ -177,6 +177,14 @@ QtObject {
             }
         },
         Component {
+            // Lock screen
+            StackPage {
+                Component {
+                    LockScreenPage {}
+                }
+            }
+        },
+        Component {
             // Services
             StackPage {
                 Component {

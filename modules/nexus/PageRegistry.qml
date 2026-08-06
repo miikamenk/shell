@@ -94,6 +94,13 @@ QtObject {
             category: "shell"
         },
         {
+            id: "lock",
+            label: qsTr("Lock screen"),
+            icon: "lock",
+            description: qsTr("Lock UI, fingerprint, face unlock"),
+            category: "shell"
+        },
+        {
             id: "services",
             label: Tr.tr("Services"),
             icon: "build",
