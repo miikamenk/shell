@@ -8,6 +8,7 @@ import qs.components
 import qs.services
 import qs.modules.nexus.common
 import qs.modules.nexus.pages
+import qs.modules.nexus.pages.appearance
 import qs.modules.nexus.pages.apps
 import qs.modules.nexus.pages.audio
 import qs.modules.nexus.pages.bluetooth
@@ -36,6 +37,17 @@ QtObject {
                 }
                 Component {
                     ColourSelect {}
+                }
+            }
+        },
+        Component {
+            // Appearance
+            StackPage {
+                Component {
+                    AppearancePage {}
+                }
+                Component {
+                    FontStyle {}
                 }
             }
         },

@@ -12,7 +12,14 @@ QtObject {
             id: "appearance",
             label: Tr.tr("Wallpaper & style"),
             icon: "palette",
-            description: Tr.tr("Wallpaper, fonts, colours"),
+            description: Tr.tr("Wallpaper, colours, theme"),
+            category: "appearance"
+        },
+        {
+            id: "fonts",
+            label: Tr.tr("Appearance"),
+            icon: "format_paint",
+            description: Tr.tr("Fonts, scaling, transparency"),
             category: "appearance"
         },
 
