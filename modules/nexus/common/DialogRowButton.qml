@@ -19,9 +19,14 @@ Item {
     required property string header
     required property Component content
     required property string acceptLabel
+    property string subtext
+    property string trailingIcon
+    property string destructiveLabel
     property bool acceptAllowed: true
     property bool separateContent
     property int horizontalContentMargin
+    property bool first
+    property bool last: true
 
     property real openWidth: Math.min(rootParent.width * 0.8, Tokens.sizes.nexus.maxDialogWidth)
     property real openHeight: Math.min(rootParent.height * 0.8, Tokens.sizes.nexus.maxDialogHeight)
@@ -29,6 +34,7 @@ Item {
 
     signal accepted
     signal cancelled
+    signal destructed
 
     function reparentWrapper(): void {
         const newParent = open ? rootParent : root;
@@ -79,6 +85,8 @@ Item {
                 openButton.opacity: 0
                 dialogContent.opacity: 1
                 dialogBg.radius: root.Tokens.rounding.extraLargeIncreased
+                dialogBg.topLeftRadius: root.Tokens.rounding.extraLargeIncreased
+                dialogBg.topRightRadius: root.Tokens.rounding.extraLargeIncreased
                 dialogBg.bottomLeftRadius: root.Tokens.rounding.extraLargeIncreased
                 dialogBg.bottomRightRadius: root.Tokens.rounding.extraLargeIncreased
                 dialogWrapper.x: (root.rootParent.width - root.openWidth) / 2
@@ -103,7 +111,7 @@ Item {
                 property: "enabled"
             }
             Anim {
-                properties: "opacity,radius,bottomLeftRadius,bottomRightRadius"
+                properties: "opacity,radius,topLeftRadius,topRightRadius,bottomLeftRadius,bottomRightRadius"
                 type: Anim.DefaultEffects
             }
             Anim {
@@ -120,6 +128,8 @@ Item {
 
             anchors.fill: parent
             radius: dialogBg.radius
+            topLeftRadius: dialogBg.topLeftRadius
+            topRightRadius: dialogBg.topRightRadius
             bottomLeftRadius: dialogBg.bottomLeftRadius
             bottomRightRadius: dialogBg.bottomRightRadius
             level: 4
@@ -136,8 +146,10 @@ Item {
             opacity: blobGroup.color.a
 
             radius: Tokens.rounding.extraSmall
-            bottomLeftRadius: Tokens.rounding.extraLarge
-            bottomRightRadius: Tokens.rounding.extraLarge
+            topLeftRadius: root.first ? Tokens.rounding.extraLarge : Tokens.rounding.extraSmall
+            topRightRadius: root.first ? Tokens.rounding.extraLarge : Tokens.rounding.extraSmall
+            bottomLeftRadius: root.last ? Tokens.rounding.extraLarge : Tokens.rounding.extraSmall
+            bottomRightRadius: root.last ? Tokens.rounding.extraLarge : Tokens.rounding.extraSmall
         }
 
         RowButton {
@@ -152,9 +164,12 @@ Item {
             height: Math.min(implicitHeight, parent.height) // Clamp to parent height due to overshoot anim
             color: "transparent"
 
-            last: true
+            first: root.first
+            last: root.last
             icon: root.icon
             text: root.label
+            subtext: root.subtext
+            trailingIcon: root.trailingIcon
             onClicked: root.open = true
         }
 
@@ -214,8 +229,30 @@ Item {
                     }
 
                     RowLayout {
-                        Layout.alignment: Qt.AlignRight
+                        Layout.fillWidth: true
                         spacing: Tokens.spacing.extraSmall
+
+                        Loader {
+                            active: root.destructiveLabel
+                            visible: active
+
+                            sourceComponent: TextButton {
+                                type: TextButton.Text
+                                isRound: true
+                                horizontalPadding: Tokens.padding.largeIncreased
+                                verticalPadding: Tokens.padding.medium
+                                inactiveOnColour: Colours.palette.m3error
+                                text: root.destructiveLabel
+                                onClicked: {
+                                    root.destructed();
+                                    root.open = false;
+                                }
+                            }
+                        }
+
+                        Item {
+                            Layout.fillWidth: true
+                        }
 
                         TextButton {
                             type: TextButton.Text
