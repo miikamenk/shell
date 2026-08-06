@@ -24,7 +24,10 @@ Singleton {
     readonly property HyprlandMonitor focusedMonitor: Hyprland.focusedMonitor
     readonly property int activeWsId: focusedWorkspace?.id ?? 1
 
-    readonly property HyprKeyboard keyboard: extras.devices.keyboards.find(kb => kb.main) ?? null
+    // Not a binding: Hyprland briefly reports no main keyboard while clients create
+    // and destroy virtual keyboards (eg. focusing a text field in an Electron app),
+    // so keep the last known main keyboard instead of flapping to null.
+    property HyprKeyboard keyboard: null
     readonly property bool capsLock: keyboard?.capsLock ?? false
     readonly property bool numLock: keyboard?.numLock ?? false
     readonly property string defaultKbLayout: keyboard?.layout.split(",")[0] ?? "??"
@@ -37,6 +40,12 @@ Singleton {
     readonly property alias devices: extras.devices
 
     property string lastSpecialWorkspace: ""
+
+    // Keyboard state that has already been announced via a toast, so state that
+    // flaps while devices come and go is not announced as an actual change
+    property bool announcedCapsLock
+    property bool announcedNumLock
+    property string announcedKbLayout
 
     signal configReloaded
 
@@ -85,6 +94,54 @@ Singleton {
         focusWorkspace(openSpecials[nextIndex].name);
     }
 
+    function updateKeyboard(): void {
+        const keyboards = devices.keyboards;
+        const main = keyboards.find(kb => kb.main);
+
+        if (main)
+            keyboard = main;
+        else if (!keyboards.find(kb => kb === keyboard))
+            keyboard = null; // The main keyboard is really gone, not just unset
+    }
+
+    function announceKbState(): void {
+        if (!keyboard)
+            return;
+
+        const toasts = GlobalConfig.utilities.toasts;
+
+        if (capsLock !== announcedCapsLock) {
+            announcedCapsLock = capsLock;
+
+            if (hadKeyboard && toasts.capsLockChanged) {
+                if (capsLock)
+                    Toaster.toast(qsTr("Caps lock enabled"), qsTr("Caps lock is currently enabled"), "keyboard_capslock_badge");
+                else
+                    Toaster.toast(qsTr("Caps lock disabled"), qsTr("Caps lock is currently disabled"), "keyboard_capslock");
+            }
+        }
+
+        if (numLock !== announcedNumLock) {
+            announcedNumLock = numLock;
+
+            if (hadKeyboard && toasts.numLockChanged) {
+                if (numLock)
+                    Toaster.toast(qsTr("Num lock enabled"), qsTr("Num lock is currently enabled"), "looks_one");
+                else
+                    Toaster.toast(qsTr("Num lock disabled"), qsTr("Num lock is currently disabled"), "timer_1");
+            }
+        }
+
+        if (kbLayoutFull !== announcedKbLayout) {
+            announcedKbLayout = kbLayoutFull;
+
+            if (hadKeyboard && toasts.kbLayoutChanged)
+                Toaster.toast(qsTr("Keyboard layout changed"), qsTr("Layout changed to: %1").arg(kbLayoutFull), "keyboard");
+        }
+
+        hadKeyboard = true;
+    }
+
     function monitorNames(): list<string> {
         return monitors.values.map(e => e.name);
     }
@@ -117,8 +174,34 @@ Singleton {
         }
     }
 
+Component.onCompleted: {
+        reloadDynamicConfs();
+        updateKeyboard();
+    }
+
     onUsingLuaChanged: reloadDynamicConfs()
-    Component.onCompleted: reloadDynamicConfs()
+
+    onCapsLockChanged: kbStateDebounce.restart()
+    onNumLockChanged: kbStateDebounce.restart()
+    onKbLayoutFullChanged: kbStateDebounce.restart()
+    onKeyboardChanged: kbStateDebounce.restart()
+
+    // Wait for the keyboard state to settle before announcing it, so devices
+    // appearing and disappearing does not toast changes that never happened
+    Timer {
+        id: kbStateDebounce
+
+        interval: 250
+        onTriggered: root.announceKbState()
+    }
+
+    Connections {
+        function onKeyboardsChanged(): void {
+            root.updateKeyboard();
+        }
+
+        target: root.devices
+    }
 
     Connections {
         function onRawEvent(event: HyprlandEvent): void {
