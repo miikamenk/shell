@@ -22,6 +22,13 @@ QtObject {
             description: Tr.tr("Fonts, scaling, transparency"),
             category: "appearance"
         },
+        {
+            id: "desktop",
+            label: qsTr("Desktop"),
+            icon: "wallpaper",
+            description: qsTr("Desktop clock, visualiser"),
+            category: "appearance"
+        },
 
         // Connectivity
         // TODO

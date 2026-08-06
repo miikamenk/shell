@@ -51,6 +51,14 @@ QtObject {
                 }
             }
         },
+        Component {
+            // Desktop
+            StackPage {
+                Component {
+                    DesktopPage {}
+                }
+            }
+        },
 
         // Connectivity
         Component {
