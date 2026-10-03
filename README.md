@@ -23,4 +23,4 @@ I might hop to the next shell at any time and this fork will become unmaintained
 
 - fixed e.g. electrons virtual keyboards causing numlock popup to appear constantly
 - pretty much every shell.json option is editable from the settings nexus now, so no more hand editing json for fonts, idle timeouts, lock screen, launcher actions etc
-- iNiR theming bridge so changing the wallpaper or scheme also re-themes gtk/qt, terminals, editors, chromium, sddm and the rest, see `scripts/inir-theme`
+- caelestia templates so changing the wallpaper or scheme also re-themes kitty, alacritty, fish, hyprland, hyprlock, nvim, herdr and chromium, see `docs/templates.md`
