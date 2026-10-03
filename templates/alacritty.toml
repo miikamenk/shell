@@ -1,0 +1,61 @@
+# Alacritty colours, rendered by caelestia from the current scheme.
+# Imported from alacritty.toml; colours only, no window settings.
+#
+# Same mapping as caelestia's OSC sequences and the kitty template: background
+# surface, foreground onSurface, cursor secondary, 0-15 from term0-15.
+
+[colors.primary]
+background = '#{{ surface.hex }}'
+foreground = '#{{ onSurface.hex }}'
+
+[colors.cursor]
+text = '#{{ surface.hex }}'
+cursor = '#{{ secondary.hex }}'
+
+[colors.vi_mode_cursor]
+text = '#{{ surface.hex }}'
+cursor = '#{{ primary.hex }}'
+
+[colors.selection]
+text = '#{{ surface.hex }}'
+background = '#{{ secondary.hex }}'
+
+[colors.search.matches]
+foreground = '#{{ surface.hex }}'
+background = '#{{ tertiary.hex }}'
+
+[colors.search.focused_match]
+foreground = '#{{ surface.hex }}'
+background = '#{{ primary.hex }}'
+
+[colors.footer_bar]
+foreground = '#{{ onSurface.hex }}'
+background = '#{{ surfaceContainer.hex }}'
+
+[colors.hints.start]
+foreground = '#{{ surface.hex }}'
+background = '#{{ tertiary.hex }}'
+
+[colors.hints.end]
+foreground = '#{{ surface.hex }}'
+background = '#{{ secondary.hex }}'
+
+[colors.normal]
+black   = '#{{ term0.hex }}'
+red     = '#{{ term1.hex }}'
+green   = '#{{ term2.hex }}'
+yellow  = '#{{ term3.hex }}'
+blue    = '#{{ term4.hex }}'
+magenta = '#{{ term5.hex }}'
+cyan    = '#{{ term6.hex }}'
+white   = '#{{ term7.hex }}'
+
+[colors.bright]
+black   = '#{{ term8.hex }}'
+red     = '#{{ term9.hex }}'
+green   = '#{{ term10.hex }}'
+yellow  = '#{{ term11.hex }}'
+blue    = '#{{ term12.hex }}'
+magenta = '#{{ term13.hex }}'
+cyan    = '#{{ term14.hex }}'
+white   = '#{{ term15.hex }}'

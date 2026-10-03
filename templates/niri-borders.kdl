@@ -1,0 +1,23 @@
+// Niri border colours, rendered by caelestia from the current scheme.
+// Kept for parity with the old iNiR set; this machine runs Hyprland, so
+// nothing reads it unless you switch compositors.
+
+layout {
+    focus-ring {
+        // A gradient from primary to tertiary across the focused window,
+        // hue-interpolated in oklch for smooth transitions.
+        active-gradient from="#{{ primary.hex }}" to="#{{ tertiary.hex }}" angle=45 in="oklch longer hue"
+        inactive-color "#{{ outline.hex }}"
+        urgent-color "#{{ error.hex }}"
+
+        // Prefer a flat themed ring instead? Comment the gradient above and
+        // uncomment this:
+        // active-color "#{{ primary.hex }}"
+    }
+
+    border {
+        active-color   "#{{ primary.hex }}"
+        inactive-color "#{{ outlineVariant.hex }}"
+        urgent-color   "#{{ error.hex }}"
+    }
+}

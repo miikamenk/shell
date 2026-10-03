@@ -1,0 +1,65 @@
+/* Steam/Millennium Material tokens, rendered by caelestia from the current
+   scheme. Kept for parity with the old iNiR set; Millennium is not installed
+   on this machine, so nothing loads it.
+
+   caelestia's .rgb form already emits `rgb(r,g,b)`, so these are not wrapped
+   the way iNiR's template wrapped its bare triplets. */
+:root {
+    --theme-color: "caelestia";
+
+    --md-sys-color-primary: {{ primary.rgb }};
+    --md-sys-color-on-primary: {{ onPrimary.rgb }};
+    --md-sys-color-primary-container: {{ primaryContainer.rgb }};
+    --md-sys-color-on-primary-container: {{ onPrimaryContainer.rgb }};
+    --md-sys-color-primary-fixed: {{ primaryFixed.rgb }};
+    --md-sys-color-primary-fixed-dim: {{ primaryFixedDim.rgb }};
+    --md-sys-color-on-primary-fixed: {{ onPrimaryFixed.rgb }};
+    --md-sys-color-on-primary-fixed-variant: {{ onPrimaryFixedVariant.rgb }};
+
+    --md-sys-color-secondary: {{ secondary.rgb }};
+    --md-sys-color-on-secondary: {{ onSecondary.rgb }};
+    --md-sys-color-secondary-container: {{ secondaryContainer.rgb }};
+    --md-sys-color-on-secondary-container: {{ onSecondaryContainer.rgb }};
+    --md-sys-color-secondary-fixed: {{ secondaryFixed.rgb }};
+    --md-sys-color-secondary-fixed-dim: {{ secondaryFixedDim.rgb }};
+    --md-sys-color-on-secondary-fixed: {{ onSecondaryFixed.rgb }};
+    --md-sys-color-on-secondary-fixed-variant: {{ onSecondaryFixedVariant.rgb }};
+
+    --md-sys-color-tertiary: {{ tertiary.rgb }};
+    --md-sys-color-on-tertiary: {{ onTertiary.rgb }};
+    --md-sys-color-tertiary-container: {{ tertiaryContainer.rgb }};
+    --md-sys-color-on-tertiary-container: {{ onTertiaryContainer.rgb }};
+    --md-sys-color-tertiary-fixed: {{ tertiaryFixed.rgb }};
+    --md-sys-color-tertiary-fixed-dim: {{ tertiaryFixedDim.rgb }};
+    --md-sys-color-on-tertiary-fixed: {{ onTertiaryFixed.rgb }};
+    --md-sys-color-on-tertiary-fixed-variant: {{ onTertiaryFixedVariant.rgb }};
+
+    --md-sys-color-error: {{ error.rgb }};
+    --md-sys-color-on-error: {{ onError.rgb }};
+    --md-sys-color-error-container: {{ errorContainer.rgb }};
+    --md-sys-color-on-error-container: {{ onErrorContainer.rgb }};
+
+    --md-sys-color-background: {{ background.rgb }};
+    --md-sys-color-on-background: {{ onBackground.rgb }};
+    --md-sys-color-surface: {{ surface.rgb }};
+    --md-sys-color-on-surface: {{ onSurface.rgb }};
+    --md-sys-color-surface-variant: {{ surfaceVariant.rgb }};
+    --md-sys-color-on-surface-variant: {{ onSurfaceVariant.rgb }};
+    --md-sys-color-surface-dim: {{ surfaceDim.rgb }};
+    --md-sys-color-surface-bright: {{ surfaceBright.rgb }};
+    --md-sys-color-surface-container-lowest: {{ surfaceContainerLowest.rgb }};
+    --md-sys-color-surface-container-low: {{ surfaceContainerLow.rgb }};
+    --md-sys-color-surface-container: {{ surfaceContainer.rgb }};
+    --md-sys-color-surface-container-high: {{ surfaceContainerHigh.rgb }};
+    --md-sys-color-surface-container-highest: {{ surfaceContainerHighest.rgb }};
+    --md-sys-color-outline: {{ outline.rgb }};
+    --md-sys-color-outline-variant: {{ outlineVariant.rgb }};
+
+    --md-sys-color-inverse-surface: {{ inverseSurface.rgb }};
+    --md-sys-color-inverse-on-surface: {{ inverseOnSurface.rgb }};
+    --md-sys-color-inverse-primary: {{ inversePrimary.rgb }};
+    --md-sys-color-shadow: {{ shadow.rgb }};
+    --md-sys-color-scrim: {{ scrim.rgb }};
+    --md-sys-color-surface-tint: {{ surfaceTint.rgb }};
+    --md-sys-color-source-color: {{ primary_paletteKeyColor.rgb }};
+}

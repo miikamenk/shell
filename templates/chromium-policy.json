@@ -1,0 +1,4 @@
+{
+  "BrowserThemeColor": "#{{ primary_paletteKeyColor.hex }}",
+  "BackgroundModeEnabled": false
+}

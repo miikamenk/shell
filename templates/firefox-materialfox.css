@@ -1,0 +1,7 @@
+/* MaterialFox colours, rendered by caelestia from the current scheme.
+   Kept for parity with the old iNiR set; there is no Firefox profile on this
+   machine, so nothing imports it until you point a userChrome.css at it. */
+:root {
+    --mf-accent-color: #{{ primary.hex }};
+    --mf-bg-color: #{{ surface.hex }};
+}
