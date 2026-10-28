@@ -79,6 +79,28 @@ Searcher {
             return root.list.map(w => w.path).join("\n");
         }
 
+        // Opens the launcher in wallpaper mode on the focused monitor
+        function openSwitcher(): void {
+            const screenState = ShellState.forActive();
+            if (!screenState)
+                return;
+            screenState.launcher = true;
+            const search = ShellState.componentsForActive()?.find("launcherSearch");
+            if (search) {
+                search.text = `${GlobalConfig.launcher.actionPrefix}wallpaper `;
+                search.forceActiveFocus();
+            }
+        }
+
+        function toggleSwitcher(): void {
+            const screenState = ShellState.forActive();
+            const search = ShellState.componentsForActive()?.find("launcherSearch");
+            if (screenState?.launcher && search?.text.startsWith(`${GlobalConfig.launcher.actionPrefix}wallpaper `))
+                screenState.launcher = false;
+            else
+                openSwitcher();
+        }
+
         target: "wallpaper"
     }
 
