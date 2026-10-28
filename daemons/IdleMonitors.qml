@@ -6,6 +6,7 @@ import Quickshell.Wayland
 import Quickshell.Services.UPower
 import Caelestia.Config
 import Caelestia.Services
+import Caelestia.State
 import qs.services
 import qs.modules.lock
 
@@ -62,6 +63,9 @@ Scope {
 
             enabled: {
                 if (!root.enabled || !(modelData.enabled ?? true))
+                    return false;
+                // Don't rely on the compositor honouring our own inhibitor surface
+                if (RuntimeState.inhibitIdle && (modelData.respectInhibitors ?? true))
                     return false;
                 if (modelData.inhibitWhenAudio && root.hasPlayer)
                     return false;
